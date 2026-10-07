@@ -3,7 +3,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Reveal, Counter, Tilt } from './Fx.jsx'
 import { enhanceImage } from './enhanceImage.js'
 import { LOGO } from '../brandLogos.js'
-import { STATS, SERVICES, REGIONS, VALUES, DEPTS } from '../data.js'
+import { useLang } from '../i18n.jsx'
 
 const Head = ({ kicker, title, text }) => (
   <Reveal className="sec-head">
@@ -15,7 +15,8 @@ const Head = ({ kicker, title, text }) => (
 
 /* شريطان متقاطعان بشكل X: أحمر في الأمام يتحرك لجهة، وداكن في الخلف يتحرك للجهة المعاكسة */
 export function MarqueeX() {
-  const base = ['آسياسيل', 'شحن رصيد', 'بطاقات الألعاب', 'كروت الهدايا', 'ترفيه رقمي', 'تسوق إلكتروني', 'أسعار تنافسية', 'جودة أصلية']
+  const { t } = useLang()
+  const base = t('mx')
   const rowA = [...base, ...base]
   const rowB = [...base.slice(4), ...base.slice(0, 4), ...base.slice(4), ...base.slice(0, 4)]
   const Strip = ({ cls, row }) => (
@@ -42,33 +43,30 @@ const IconRocket = () => (
   </svg>
 )
 
-const TITLE = [['بسم الله نبدأ،', ''], ['وعلى الثقة نبني…', 'ab-hl']]
-
-const PROV = ['بغداد', 'كربلاء', 'بابل', 'النجف', 'القادسية', 'ميسان', 'ذي قار', 'البصرة']
-
-const PANELS = [
-  { n: '01', t: 'قصتنا', ico: null },
-  { n: '02', t: 'رؤيتنا', ico: <IconTarget /> },
-  { n: '03', t: 'رسالتنا', ico: <IconRocket /> },
-]
+const PANEL_ICO = [null, <IconTarget />, <IconRocket />]
+const mark = (s) => <mark key={s}>{s}</mark>
+const hl = (s) => <span className="ab-hl2">{s}</span>
 
 function PanelBody({ i }) {
+  const { t } = useLang()
   if (i === 0) return (
     <>
-      <p className="ab-lead">
-        انطلقت شركة ماسال منذ تاريخ <mark>2012</mark> لتكون وكيلًا رئيسيًا لشركة <mark>آسياسيل</mark> للاتصالات واسمًا رائدًا في عالم البطاقات الإلكترونية، واضعةً الجودة والسرعة والأمان أساسًا لكل خدمة نقدمها.
-      </p>
+      <p className="ab-lead">{t('about.lead')(mark)}</p>
       <div className="ab-cols">
-        <p>تغطي شركة ماسال أغلب محافظات الوسط والجنوب. نعمل بروح الاحتراف لنوفّر لعملائنا أفضل البطاقات الرقمية بكل سهولة ومصداقية، لنمنحهم تجربة شراء مريحة وموثوقة في كل وقت.</p>
-        <p>نؤمن أن النجاح الحقيقي يبدأ من رضا العميل، لذلك نسعى دائمًا لتقديم أحدث المنتجات بأسعار منافسة ودعم متواصل، لنكون الشريك الذي يعتمد عليه الجميع في عالم الخدمات الإلكترونية.</p>
+        <p>{t('about.c1')}</p>
+        <p>{t('about.c2')}</p>
       </div>
     </>
   )
-  if (i === 1) return <p className="ab-big">أن تصبح شركة ماسال <span className="ab-hl2">الخيار الأول</span> في السوق.</p>
-  return <p className="ab-big">بناء علاقة طويلة الأمد مع عملائنا قائمة على <span className="ab-hl2">الثقة والالتزام والتميز</span>.</p>
+  if (i === 1) return <p className="ab-big">{t('about.vision')(hl)}</p>
+  return <p className="ab-big">{t('about.mission')(hl)}</p>
 }
 
 export function About() {
+  const { t, lang } = useLang()
+  const TITLE = [[t('about.t1'), ''], [t('about.t2'), 'ab-hl']]
+  const PROV = t('about.provs')
+  const PANELS = [1, 2, 3].map((n) => ({ n: '0' + n, t: t('about.p' + n), ico: PANEL_ICO[n - 1] }))
   const titleRef = useRef(null)
   const inView = useInView(titleRef, { once: true, margin: '-60px' })
   const [act, setAct] = useState(0)
@@ -77,15 +75,15 @@ export function About() {
       <div className="ab-bg" aria-hidden />
       <div className="container ab-wrap">
         <header className="ab-head">
-          <Reveal y={20}><span className="kicker">من نحن</span></Reveal>
-          <h2 className="ab-title" ref={titleRef} aria-label="بسم الله نبدأ، وعلى الثقة نبني…">
-            {TITLE.map(([t, c], i) => (
+          <Reveal y={20}><span className="kicker">{t('about.kicker')}</span></Reveal>
+          <h2 className="ab-title" ref={titleRef} aria-label={TITLE.map((x) => x[0]).join(' ')}>
+            {TITLE.map(([tx, c], i) => (
               <span className="ab-w" key={i}>
-                <motion.span className={c} initial={{ y: '110%' }} animate={inView ? { y: 0 } : { y: '110%' }} transition={{ duration: 0.95, delay: 0.1 + i * 0.16, ease: [0.22, 1, 0.36, 1] }}>{t}</motion.span>
+                <motion.span key={lang} className={c} initial={{ y: '110%' }} animate={inView ? { y: 0 } : { y: '110%' }} transition={{ duration: 0.95, delay: 0.1 + i * 0.16, ease: [0.22, 1, 0.36, 1] }}>{tx}</motion.span>
               </span>
             ))}
           </h2>
-          <Reveal delay={0.4} y={16}><p className="ab-sub">وكيل آسياسيل الرئيسي في العراق منذ <b>2012</b></p></Reveal>
+          <Reveal delay={0.4} y={16}><p className="ab-sub">{t('about.sub')} <b>2012</b></p></Reveal>
         </header>
 
         <Reveal y={40} className="ab-acc">
@@ -101,15 +99,15 @@ export function About() {
           ))}
         </Reveal>
 
-        <div className="ab-prov" aria-label="المحافظات التي نغطيها">
-          <span className="ab-prov-l"><b>08</b>محافظات نغطيها</span>
+        <div className="ab-prov" aria-label={t('about.provAria')}>
+          <span className="ab-prov-l"><b>08</b>{t('about.provLabel')}</span>
           <div className="ab-prov-m"><div className="ab-prov-t">
             {[...PROV, ...PROV, ...PROV, ...PROV].map((n, i) => <span key={i}><i />{n}</span>)}
           </div></div>
         </div>
 
         <Reveal className="ab-quote" y={24}>
-          <p>معكم نبدأ… <span className="ab-hl">وبثقتكم نكبر</span></p>
+          <p>{t('about.q1')} <span className="ab-hl">{t('about.q2')}</span></p>
         </Reveal>
       </div>
     </section>
@@ -117,6 +115,11 @@ export function About() {
 }
 
 export function Stats() {
+  const { t } = useLang()
+  const labels = t('stats')
+  const STATS = [
+    { n: 10000, suffix: '+' }, { n: 166, suffix: '' }, { n: 150, suffix: '+' }, { n: 220, suffix: '' }, { n: 2012, suffix: '', plain: true },
+  ].map((s, i) => ({ ...s, label: labels[i] }))
   return (
     <section className="stats">
       <div className="container stats-grid">
@@ -146,7 +149,6 @@ const SV_THEME = [
   ['#ff3b47', '#7a0610'], ['#7c5cff', '#160f4a'], ['#ff9d2e', '#b5113f'],
   ['#2f8bff', '#0a1b52'], ['#ff3d95', '#32094f'], ['#f5c451', '#2b1d03'],
 ]
-const SV_AMT = [null, '10$ · 25$ · 50$', 'لكل مناسبة', 'تسوق عالمي', 'اشتراكات', 'أسعار الجملة']
 const SV_IMGS = ['/images/card-40000.webp', '/images/services/games.jpg', '/images/services/gifts.jpg', '/images/services/shopping.jpg', '/images/services/games2.jpg', '/images/services/charge2.png']
 /* تحسين مسبق لكل الصور مرة واحدة، حتى تظهر فورًا عند الاختيار */
 const ENH_P = {}, ENH_R = {}
@@ -200,6 +202,7 @@ const SV_ART = [
 
 /* بطاقة مخصصة لكل خدمة: تصميم + ألوان + صورة حقيقية إن وُجدت */
 function SvCardFace({ i, title }) {
+  const { t } = useLang()
   const [a, b] = SV_THEME[i]
   const src = useEnh(SV_IMGS[i])
   const real = true
@@ -215,13 +218,15 @@ function SvCardFace({ i, title }) {
       <div className="svc-bot">
         <span className="svc-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{SV_ICONS[i]}</svg></span>
         <b>{title}</b>
-        {SV_AMT[i] && <em className="svc-amt">{SV_AMT[i]}</em>}
+        {t('svc.amt')[i] && <em className="svc-amt">{t('svc.amt')[i]}</em>}
       </div>
     </div>
   )
 }
 
 export function Services() {
+  const { t, arrow } = useLang()
+  const SERVICES = t('svc.list')
   const n = SERVICES.length
   const [act, setAct] = useState(0)
   const [hold, setHold] = useState(false)
@@ -241,7 +246,7 @@ export function Services() {
     <section className="sec sv-sec" id="services">
       <div className="sv-bg" aria-hidden />
       <div className="container">
-        <Head kicker="خدماتنا" title="كل ما تحتاجه من الكروت الإلكترونية" text="كروت شحن، هدايا وألعاب – بسرعة وأمان! التميز في الجودة وسهولة الاستخدام هو هدفنا لضمان أفضل تجربة لك." />
+        <Head kicker={t('svc.kicker')} title={t('svc.title')} text={t('svc.text')} />
         <div className="sv-show" style={{ '--ca': a, '--cb': b }}>
           <ul className="sv-list" onMouseEnter={() => setHold(true)} onMouseLeave={() => setHold(false)}>
             {SERVICES.map((s, i) => (
@@ -271,34 +276,9 @@ export function Services() {
                 </motion.div>
               </AnimatePresence>
             </div>
-            <span className="sv-badge b-a">{['فوري', 'تسليم خلال ثوانٍ', 'لكل مناسبة', 'دفع آمن', 'بكبسة زر', 'أسعار الجملة'][act]}</span>
-            <span className="sv-badge b-b">أصلي 100%</span>
+            <span className="sv-badge b-a">{t('svc.badges')[act]}</span>
+            <span className="sv-badge b-b">{t('svc.genuine')}</span>
           </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export function Coverage() {
-  const total = REGIONS.reduce((a, r) => a + r.branches, 0)
-  return (
-    <section className="sec cov" id="coverage">
-      <div className="container">
-        <Head kicker="الانتشار" title={`${total} فرعًا تغطي الوسط والجنوب`} text="بغداد، بابل، القادسية، كربلاء المقدسة، النجف الأشرف، ذي قار، ميسان والبصرة — نخدمكم أينما كنتم." />
-        <div className="cov-grid">
-          {REGIONS.map((r, i) => (
-            <Reveal key={r.name} delay={i * 0.12}>
-              <div className="region">
-                <div className="region-top">
-                  <div><h3>{r.name}</h3><small>{r.sub}</small></div>
-                  <div className="region-n"><Counter to={r.branches} /><small>فرع</small></div>
-                </div>
-                <div className="bar"><motion.i initial={{ width: 0 }} whileInView={{ width: `${(r.branches / 64) * 100}%` }} viewport={{ once: true }} transition={{ duration: 1.4, delay: 0.3 }} /></div>
-                <div className="chips">{r.cities.map((c) => <span key={c}>{c}</span>)}</div>
-              </div>
-            </Reveal>
-          ))}
         </div>
       </div>
     </section>
@@ -335,6 +315,8 @@ function BrandMark({ k }) {
 }
 
 export function Values() {
+  const { t } = useLang()
+  const VALUES = t('values')
   const wrap = useRef(null)
   const onMove = (e) => {
     const r = wrap.current.getBoundingClientRect()
@@ -350,8 +332,8 @@ export function Values() {
             <ellipse cx="720" cy="300" rx="600" ry="380" /><ellipse cx="720" cy="300" rx="470" ry="290" /><ellipse cx="720" cy="300" rx="340" ry="200" />
           </svg>
           <Reveal className="bw-head">
-            <span className="bw-pill">عالم من الكروت الإلكترونية بانتظارك!</span>
-            <h2>تشكيلة متنوعة من الكروت <br />الإلكترونية لتلبية كل احتياجاتك!</h2>
+            <span className="bw-pill">{t('bw.pill')}</span>
+            <h2>{t('bw.h1')} <br />{t('bw.h2')}</h2>
           </Reveal>
           {BRANDS.map(([x, y, k], i) => (
             <motion.span key={i} className={"bw-t" + (k === "asiacell" ? " hot" : "")} style={{ left: `${(x / 1440) * 100}%`, top: `${(y / 680) * 100}%`, '--d': 0.4 + (i % 5) * 0.25, animationDelay: `${(i % 7) * -0.9}s` }}
@@ -364,23 +346,6 @@ export function Values() {
         <ul className="bw-vals">
           {VALUES.map((v) => <li key={v.title}><b>{v.title}</b><span>{v.text}</span></li>)}
         </ul>
-      </div>
-    </section>
-  )
-}
-
-export function Structure() {
-  return (
-    <section className="sec" id="structure">
-      <div className="container">
-        <Head kicker="الهيكل التنظيمي" title="فريق متكامل… لأداء لا يتوقف" text="هيكل تنظيمي يضمن كفاءة الأداء وجودة الخدمة، بأكثر من 150 موظفًا و220 مندوبًا ميدانيًا." />
-        <div className="dept-grid">
-          {DEPTS.map((d, i) => (
-            <Reveal key={d.title} delay={(i % 3) * 0.1}>
-              <div className="dept"><span>{String(i + 1).padStart(2, '0')}</span><h3>{d.title}</h3><p>{d.text}</p></div>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   )
@@ -439,7 +404,8 @@ function FinPixels() {
 }
 
 export function CTA() {
-  const links = [['من نحن', '#about'], ['خدماتنا', '#services'], ['المعرض', '#gallery'], ['التشكيلة', '#values']]
+  const { t, arrow } = useLang()
+  const links = [[t('nav.about'), '#about'], [t('nav.services'), '#services'], [t('nav.gallery'), '#gallery'], [t('nav.brands'), '#values']]
   return (
     <footer className="fin" id="join">
       <div className="fin-bg" aria-hidden>
@@ -448,18 +414,18 @@ export function CTA() {
       </div>
       <div className="container fin-in">
         <Reveal className="fin-top" y={34}>
-          <span className="fin-pill"><i />ماسال معك في كل خطوة</span>
-          <h2>جاهز تبدأ؟ <span>ماسال معك</span> دائمًا.</h2>
-          <p>انضم إلى آلاف الموزعين والعملاء الذين يثقون بنا كل يوم.</p>
+          <span className="fin-pill"><i />{t('fin.pill')}</span>
+          <h2>{t('fin.h2a')} <span>{t('fin.h2b')}</span> {t('fin.h2c')}</h2>
+          <p>{t('fin.p')}</p>
           <div className="fin-btns">
-            <a href="#top" className="fin-btn main"><span>تواصل معنا</span><em>←</em></a>
-            <a href="#services" className="fin-btn ghost">استعرض خدماتنا</a>
+            <a href="#top" className="fin-btn main"><span>{t('fin.contact')}</span><em>{arrow}</em></a>
+            <a href="#services" className="fin-btn ghost">{t('fin.browse')}</a>
           </div>
         </Reveal>
         <div className="fin-bar">
-          <div className="fin-brand"><img src="/images/logo.png" alt="" width="42" height="42" /><div><b>ماسال</b><small>معكم نبدأ… وبثقتكم نكبر</small></div></div>
-          <nav className="fin-nav">{links.map(([t, h]) => <a key={h} href={h}>{t}</a>)}</nav>
-          <small className="fin-copy">© {new Date().getFullYear()} جميع الحقوق محفوظة لشركة دجلة.</small>
+          <div className="fin-brand"><img src="/images/logo.png" alt="" width="42" height="42" /><div><b>{t('brand')}</b><small>{t('fin.tag')}</small></div></div>
+          <nav className="fin-nav">{links.map(([tx, h]) => <a key={h} href={h}>{tx}</a>)}</nav>
+          <small className="fin-copy">© {new Date().getFullYear()} {t('fin.copy')}</small>
         </div>
       </div>
     </footer>

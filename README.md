@@ -31,6 +31,7 @@ Live card scanner hero · interactive service showcase · pixel-fade footer · d
 | 🖼️ **Photo album** | Responsive mosaic with hover captions, a full-screen lightbox, keyboard + arrow navigation. |
 | 🔠 **Brand wall** | 27 logo tiles on a dome with mouse parallax, floating motion and spring-in entrances. |
 | 🔴 **Pixel footer** | Canvas pixels glowing and drifting from both edges and fading toward the centre, plus a back-to-top button with a scroll-progress ring. |
+| 🌐 **Arabic + English** | One-click language switch in the navbar (RTL ↔ LTR). Every string lives in [`src/i18n.jsx`](src/i18n.jsx); the choice is remembered and updates `lang`, `dir` and the page title. |
 | 🌗 **Dark / light themes** | Every section is designed for both; theme is driven by `data-theme` and CSS variables. |
 | ♿ **Respectful motion** | `prefers-reduced-motion` is honoured across animations. |
 
@@ -76,7 +77,8 @@ masal/
 └── src/
     ├── main.jsx               # entry + stylesheet order
     ├── App.jsx                # page composition
-    ├── data.js                # nav, stats, services copy
+    ├── i18n.jsx               # AR/EN dictionary + LangProvider (useLang hook)
+    ├── data.js                # legacy copy (superseded by i18n.jsx)
     ├── brandLogos.js          # inline SVG paths for the brand wall
     ├── components/
     │   ├── Navbar.jsx
@@ -93,10 +95,10 @@ masal/
 
 | What | Where |
 |---|---|
-| Nav links | `NAV` in [`src/data.js`](src/data.js) |
-| Service titles & copy | `SERVICES` in [`src/data.js`](src/data.js) |
+| Any text, both languages | `src/i18n.jsx` — add or edit a key with `mk(arabic, english)` |
+| Service titles & copy | `svc.list` in `src/i18n.jsx` |
 | Service card images | `SV_IMGS` in [`src/components/Sections.jsx`](src/components/Sections.jsx) → files in `public/images/services/` |
-| Gallery photos & captions | `ALBUM` in [`src/components/Showcase.jsx`](src/components/Showcase.jsx) → files in `public/images/gallery/` |
+| Gallery photos / captions | `ALBUM` in [`src/components/Showcase.jsx`](src/components/Showcase.jsx) (files in `public/images/gallery/`) · captions in `gal.items` |
 | Brand wall logos / layout | `BRANDS` in `Sections.jsx`, paths in `brandLogos.js` |
 | Colours | CSS variables on `:root` in [`src/styles.css`](src/styles.css) (`--red`, `--red2`, `--bg`, `--txt`, …) |
 | Footer pixel density / opacity | `FinPixels` in `Sections.jsx` |

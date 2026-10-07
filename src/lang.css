@@ -1,0 +1,68 @@
+/* ================= اللغة: زر التبديل + تعديلات الاتجاه LTR للإنجليزية ================= */
+.pn-lang { height: 42px; padding: 0 14px 0 12px; border-radius: 999px; display: inline-flex; align-items: center; gap: .45rem; cursor: pointer; color: var(--txt); font: inherit;
+  border: 1px solid var(--line); background: var(--sheen); transition: .3s var(--ease, cubic-bezier(.22,1,.36,1)); }
+.pn-lang svg { width: 19px; height: 19px; transition: transform .6s cubic-bezier(.22,1,.36,1); }
+.pn-lang b { font-family: 'Space Grotesk', Cairo, sans-serif; font-size: .82rem; font-weight: 700; letter-spacing: .06em; }
+.pn-lang:hover { border-color: var(--red); background: var(--red); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 26px -8px rgba(229,9,20,.9); }
+.pn-lang:hover svg { transform: rotate(180deg); }
+@media (max-width: 1000px) { .pn-lang { height: 38px; padding: 0 10px; } .pn-lang b { display: none; } }
+
+/* ===== الإنجليزية (LTR) ===== */
+html[lang='en'] body { font-family: 'Space Grotesk', 'Cairo', system-ui, sans-serif; line-height: 1.65; }
+html[lang='en'] h1, html[lang='en'] h2, html[lang='en'] h3 { letter-spacing: -.01em; }
+
+/* الأسهم المرسومة بـ SVG تشير يسارًا في العربية؛ تُعكس في الإنجليزية */
+html[dir='ltr'] .sv-li-a svg,
+html[dir='ltr'] .btt-arrow { transform: scaleX(-1); }
+html[dir='ltr'] .sv-li-a { transform: translateX(-14px); }
+html[dir='ltr'] .sv-list li.on .sv-li-a { transform: none; }
+html[dir='ltr'] .sv-list h3 { transform-origin: left; }
+html[dir='ltr'] .sv-list li.on h3 { transform: scale(1.04); }
+html[dir='ltr'] .sv-li-p { right: auto; left: 0; transform-origin: left; }
+
+/* الخلفيات التي تدور بحسب الاتجاه */
+html[dir='ltr'] .ab-prov-t { animation-name: abMqLtr; }
+@keyframes abMqLtr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+html[dir='ltr'] .ab-quote, html[dir='ltr'] .fin-top { text-align: center; }
+
+/* العنوان العمودي لألواح «من نحن»: يُقرأ من الأعلى للأسفل في كلا الاتجاهين */
+html[dir='ltr'] .ab-pv { direction: ltr; }
+
+/* الكتل المتراكبة والشريط الجانبي */
+html[dir='ltr'] .al-cap, html[dir='ltr'] .al-num { text-align: left; }
+html[dir='ltr'] .lbx-x { inset-inline-start: auto; right: 22px; left: auto; }
+html[dir='ltr'] .bw-head { text-align: center; }
+
+/* ===== زر اللغة: مربع ===== */
+.pn-lang { width: 46px; height: 46px; padding: 0; border-radius: 14px; flex-direction: column; justify-content: center; gap: 2px; }
+.pn-lang svg { width: 17px; height: 17px; }
+.pn-lang b { font-size: .68rem; letter-spacing: .08em; line-height: 1; }
+@media (max-width: 1000px) { .pn-lang { width: 42px; height: 42px; padding: 0; } .pn-lang b { display: block; } }
+
+/* ===== زر اللغة v2: زجاجي براق + رمز كبير + شريط أحمر ===== */
+.pn-lang { position: relative; overflow: hidden; width: 46px; height: 46px; padding: 0; border-radius: 14px; gap: 0; justify-content: center; align-items: center; isolation: isolate;
+  background: linear-gradient(150deg, rgba(255,255,255,.12), rgba(255,255,255,.025)); border: 1px solid rgba(255,255,255,.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 8px 20px -12px rgba(0,0,0,.8); transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s, border-color .3s, background .3s; }
+.pn-lang::before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .35s; background: radial-gradient(90% 90% at 30% 0%, #ff5a64, #d90f1a 70%); }
+.pn-lang .pl-code { font-family: 'Space Grotesk', Cairo, sans-serif; font-size: 1.02rem; font-weight: 700; letter-spacing: .04em; line-height: 1; margin-top: 3px; animation: plFlip .55s cubic-bezier(.22,1,.36,1); }
+html[lang='en'] .pn-lang .pl-code { font-family: Cairo, sans-serif; font-size: 1.3rem; font-weight: 800; letter-spacing: 0; margin-top: 0; }
+.pn-lang .pl-globe { position: absolute; top: 5px; inset-inline-end: 5px; width: 12px; height: 12px; opacity: .5; transition: transform .8s cubic-bezier(.22,1,.36,1), opacity .3s; }
+.pn-lang .pl-bar { position: absolute; bottom: 6px; left: 50%; width: 14px; height: 2.5px; border-radius: 3px; transform: translateX(-50%); background: #ff3b47; transition: width .45s cubic-bezier(.22,1,.36,1), background .3s; }
+.pn-lang:hover { background: linear-gradient(150deg, rgba(255,255,255,.12), rgba(255,255,255,.025)); border-color: rgba(255,120,128,.6); transform: translateY(-3px); box-shadow: 0 14px 28px -10px rgba(229,9,20,.85), inset 0 1px 0 rgba(255,255,255,.3); color: #fff; }
+.pn-lang:hover::before { opacity: 1; }
+.pn-lang:hover .pl-globe { transform: rotate(180deg); opacity: .95; }
+.pn-lang:hover .pl-bar { width: 26px; background: #fff; }
+.pn-lang:active { transform: translateY(-1px) scale(.95); }
+@keyframes plFlip { from { transform: rotateX(90deg); opacity: 0; } to { transform: none; opacity: 1; } }
+:root[data-theme='light'] .pn-lang { color: #0b0b0d; background: linear-gradient(150deg, #fff, #f1f1f4); border-color: rgba(0,0,0,.12); box-shadow: inset 0 1px 0 #fff, 0 8px 18px -12px rgba(0,0,0,.35); }
+:root[data-theme='light'] .pn-lang:hover { color: #fff; }
+@media (max-width: 1000px) { .pn-lang { width: 42px; height: 42px; } .pn-lang b { display: block; } }
+
+/* ===== زر اللغة v3: مربع بسيط يطابق أزرار الناوبار ===== */
+.pn-lang { width: 42px; height: 42px; border-radius: 13px; background: var(--sheen); border: 1px solid var(--line); box-shadow: none; color: var(--txt); }
+.pn-lang::before, .pn-lang .pl-globe, .pn-lang .pl-bar { display: none; }
+.pn-lang .pl-code { margin: 0; font-size: .9rem; font-weight: 700; letter-spacing: .05em; }
+html[lang='en'] .pn-lang .pl-code { font-size: 1.15rem; letter-spacing: 0; }
+.pn-lang:hover { border-color: var(--red); color: #fff; background: var(--red); transform: translateY(-2px); box-shadow: 0 10px 26px -8px rgba(229,9,20,.9); }
+:root[data-theme='light'] .pn-lang { background: var(--sheen); border-color: var(--line); color: var(--txt); box-shadow: none; }
+:root[data-theme='light'] .pn-lang:hover { color: #fff; background: var(--red); border-color: var(--red); }

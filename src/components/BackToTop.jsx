@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLang } from '../i18n.jsx'
 
 /* زر العودة للأعلى: مربع زجاجي بحلقة تقدّم حمراء تعكس موضع التمرير */
 export default function BackToTop() {
+  const { t } = useLang()
   const [show, setShow] = useState(false)
   const ring = useRef(null)
 
@@ -24,7 +26,7 @@ export default function BackToTop() {
   const up = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
-    <button className={'btt' + (show ? ' on' : '')} onClick={up} aria-label="العودة للأعلى" tabIndex={show ? 0 : -1}>
+    <button className={'btt' + (show ? ' on' : '')} onClick={up} aria-label={t('fin.top')} tabIndex={show ? 0 : -1}>
       <svg className="btt-ring" viewBox="0 0 56 56" aria-hidden>
         <rect x="2" y="2" width="52" height="52" rx="15" pathLength="1" className="btt-track" />
         <rect x="2" y="2" width="52" height="52" rx="15" pathLength="1" className="btt-bar" ref={ring} />
