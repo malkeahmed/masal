@@ -1,0 +1,34 @@
+/* ================= Navbar v3 — clean & minimal (مثل المرجع) ================= */
+.pnav { top: 0; padding-inline: 0; }
+.pn-bar, .pnav.is-scrolled .pn-bar {
+  width: 100%; border-radius: 0; border: 0; background: transparent; box-shadow: none;
+  backdrop-filter: none; -webkit-backdrop-filter: none; overflow: visible;
+  padding: 1.15rem max(4%, calc((100% - 1200px) / 2)); gap: 2rem; transition: background .4s, padding .4s, border-color .4s, backdrop-filter .4s;
+}
+.pnav.is-scrolled .pn-bar { padding-block: .7rem; background: var(--glass); backdrop-filter: blur(18px) saturate(1.5); -webkit-backdrop-filter: blur(18px) saturate(1.5); border-bottom: 1px solid var(--line); }
+.pn-spot, .pn-progress, .pn-border, .pn-user, .pn-live { display: none !important; }
+
+/* الشعار: بسيط */
+.pn-mark { width: 38px; height: 38px; border-radius: 11px; box-shadow: 0 6px 20px -6px rgba(229,9,20,.8); }
+.pn-name { font-size: 1.35rem; background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--txt); -webkit-text-fill-color: var(--txt); }
+.pn-name small { display: none; }
+
+/* الروابط: نص نظيف بخط سفلي */
+.pn-links { gap: .4rem; }
+.pn-links a { padding: .5rem .9rem; font-size: .93rem; font-weight: 600; color: var(--mut); border-radius: 0; }
+.pn-links a:hover, .pn-links a.on { color: var(--txt); }
+:root[data-theme='light'] .pn-links a:hover, :root[data-theme='light'] .pn-links a.on { color: var(--txt); }
+.pn-pill { inset: auto .9rem .15rem .9rem; height: 2px; border-radius: 2px; background: var(--red2); border: 0; box-shadow: 0 0 10px var(--red2); }
+.pn-pill::after { display: none; }
+
+/* اليسار: تبديل الوضع + دخول + زر حدّه أحمر */
+.pn-right { gap: 1.1rem; }
+.pn-switch { width: 62px; height: 34px; padding: 0 8px; }
+.pn-thumb { width: 26px; height: 26px; top: 4px; }
+.pn-ico { width: 15px; height: 15px; } .pn-ico svg { width: 15px; height: 15px; }
+.pn-cta { padding: .62rem 1.5rem; gap: 0; border-radius: 8px; background: transparent; color: var(--txt); border: 1px solid var(--red); box-shadow: none; font-weight: 700; }
+.pn-cta::after { display: none; }
+.pn-cta:hover { background: var(--red); color: #fff; transform: none; box-shadow: 0 10px 30px -10px rgba(229,9,20,.9); }
+.pn-arrow { display: none; }
+
+@media (max-width: 1000px) { .pn-bar, .pnav.is-scrolled .pn-bar { padding-inline: 5%; } }

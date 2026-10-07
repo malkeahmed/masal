@@ -1,0 +1,32 @@
+/* مجرى الكروت + الماسح */
+.ss { --cw: 300px; --ch: 190px; position: relative; width: 100vw; margin-inline: calc(50% - 50vw); height: calc(var(--ch) + 56px); margin-top: .4rem; overflow: hidden; animation: ssIn 1.2s cubic-bezier(.22,1,.36,1) both; }
+@keyframes ssIn { from { opacity: 0; transform: translateY(14px); } }
+.ss-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.ss-track { position: absolute; inset: 0; z-index: 2; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.ss-track.grab { cursor: grabbing; }
+
+.ss-card { position: absolute; top: 50%; left: 0; width: var(--cw); height: var(--ch); margin-top: calc(var(--ch) / -2); will-change: transform; }
+.ss-normal, .ss-ascii { position: absolute; inset: 0; border-radius: 14px; overflow: hidden; }
+/* الجزء الذي لم يصل للماسح بعد: الصورة الحقيقية */
+.ss-normal { z-index: 2; box-shadow: 0 16px 34px -12px rgba(0,0,0,.7); clip-path: inset(0 0 0 var(--clip-right, 0%)); }
+.ss-normal img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+/* الجزء الذي عبر الماسح: كود */
+.ss-ascii { z-index: 1; clip-path: inset(0 calc(100% - var(--clip-left, 0%)) 0 0); background: rgba(255,60,60,.04); }
+.ss-ascii pre { position: absolute; inset: 0; margin: 0; padding: 0; overflow: hidden; white-space: pre; text-align: left; font: 11px/13px ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; color: rgba(255,150,145,.72);
+  -webkit-mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,.7) 45%, rgba(0,0,0,.25) 100%); mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,.7) 45%, rgba(0,0,0,.25) 100%); }
+
+/* خط الماسح */
+.ss-line { position: absolute; left: 50%; top: 4%; bottom: 4%; width: 2px; margin-left: -1px; z-index: 3; pointer-events: none; border-radius: 2px; opacity: .35; transition: opacity .3s;
+  background: linear-gradient(to bottom, transparent, #ff6a62 25%, #fff 50%, #ff6a62 75%, transparent);
+  box-shadow: 0 0 10px #ff4650, 0 0 22px rgba(255,70,80,.8), 0 0 46px rgba(229,9,20,.55); animation: scanPulse 1.6s ease-in-out infinite alternate; }
+.ss-line.on { opacity: 1; }
+@keyframes scanPulse { from { transform: scaleY(1); filter: brightness(.9); } to { transform: scaleY(1.04); filter: brightness(1.25); } }
+
+/* تلاشي الأطراف */
+.ss-fade { position: absolute; top: 0; bottom: 0; width: 16%; z-index: 4; pointer-events: none; }
+.ss-fade.l { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+.ss-fade.r { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+
+:root[data-theme='light'] .ss-ascii pre { color: rgba(160,20,30,.7); }
+:root[data-theme='light'] .ss-normal { box-shadow: 0 14px 28px -12px rgba(0,0,0,.35); }
+@media (prefers-reduced-motion: reduce) { .ss, .ss-line { animation: none; } }

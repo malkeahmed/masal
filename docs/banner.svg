@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-label="MASAL banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b0e"/>
+      <stop offset="1" stop-color="#17070a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="55%" r="55%">
+      <stop offset="0" stop-color="#e50914" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#e50914" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="word" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#ff8a90"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#ffffff" stroke-opacity=".05"/>
+    </pattern>
+    <pattern id="px" width="14" height="14" patternUnits="userSpaceOnUse">
+      <rect x="1" y="1" width="11" height="11" rx="1" fill="#ff3b47"/>
+    </pattern>
+    <linearGradient id="fadeL" x1="0" x2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fadeR" x1="1" x2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="mL"><rect width="420" height="420" fill="url(#fadeL)"/></mask>
+    <mask id="mR"><rect x="860" width="420" height="420" fill="url(#fadeR)"/></mask>
+  </defs>
+
+  <rect width="1280" height="420" fill="url(#bg)"/>
+  <rect width="1280" height="420" fill="url(#grid)"/>
+  <ellipse cx="640" cy="240" rx="520" ry="220" fill="url(#glow)"/>
+
+  <!-- pixels fading from both sides -->
+  <g opacity=".32">
+    <rect width="420" height="420" fill="url(#px)" mask="url(#mL)"/>
+    <rect x="860" width="420" height="420" fill="url(#px)" mask="url(#mR)"/>
+  </g>
+
+  <text x="640" y="238" text-anchor="middle" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="150" font-weight="800" letter-spacing="22" fill="url(#word)">MASAL</text>
+  <rect x="470" y="268" width="340" height="3" rx="2" fill="#e50914"/>
+  <text x="640" y="318" text-anchor="middle" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="26" font-weight="600" letter-spacing="6" fill="#ffffff" fill-opacity=".78">ASIACELL MAIN AGENT · IRAQ</text>
+  <text x="640" y="358" text-anchor="middle" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="18" letter-spacing="3" fill="#ff6b73">E-CARDS · TOP-UPS · GAMING · GIFT CARDS</text>
+</svg>

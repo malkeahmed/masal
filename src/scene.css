@@ -1,0 +1,10 @@
+/* ===== 3D scene: يغطي كامل الهيرو بلا أي إطار أو قص ===== */
+.hero { overflow: hidden; }
+.scene3d { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; z-index: 1; pointer-events: none; }
+.scene3d canvas { outline: none; pointer-events: none; }
+.hero-in { position: relative; z-index: 3; }
+.hero-visual { height: 640px; pointer-events: none; }
+.hero-visual .spin-badge, .hero-visual .users { pointer-events: auto; }
+.stage-glow, .pedestal, .ring { display: none !important; }
+.cards3d { position: relative; }
+@media (max-width: 960px) { .hero-visual { height: 460px; } }

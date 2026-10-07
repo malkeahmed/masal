@@ -1,0 +1,54 @@
+/* ================= Navbar v2 — premium capsule ================= */
+.pn-bar {
+  width: min(1120px, 100%); border-radius: 999px; padding: .5rem .55rem .5rem 1rem; gap: 1.2rem;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--glass) 88%, transparent), color-mix(in srgb, var(--glass) 70%, transparent));
+  backdrop-filter: blur(22px) saturate(1.7); -webkit-backdrop-filter: blur(22px) saturate(1.7);
+  border: 1px solid var(--line);
+  box-shadow: 0 22px 60px -22px var(--shadow), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -1px 0 rgba(229,9,20,.12);
+  overflow: hidden;
+}
+.pnav.is-scrolled .pn-bar { width: min(960px, 100%); background: var(--glass); box-shadow: 0 24px 70px -20px var(--shadow), 0 0 0 1px rgba(229,9,20,.18), inset 0 1px 0 rgba(255,255,255,.1); }
+:root[data-theme='light'] .pn-bar { box-shadow: 0 18px 50px -22px rgba(120,0,10,.35), inset 0 1px 0 #fff; }
+.pn-border { display: none; }
+
+/* ضوء يتبع المؤشر داخل الشريط */
+.pn-spot { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(255,45,58,.24), transparent 65%); }
+.pn-bar:hover .pn-spot { opacity: 1; }
+.pn-bar > *:not(.pn-spot):not(.pn-progress) { position: relative; z-index: 1; }
+
+/* خط تقدم التمرير في أسفل الشريط */
+.pn-progress { position: absolute; z-index: 2; bottom: 0; left: 28px; right: 28px; height: 2px; border-radius: 2px; transform-origin: right;
+  background: linear-gradient(90deg, #ff9aa0, var(--red2), var(--red)); box-shadow: 0 0 12px var(--red2); }
+
+/* الشعار */
+.pn-mark { width: 42px; height: 42px; border-radius: 50%; }
+.pn-name { font-size: 1.35rem; }
+.pn-name { background: linear-gradient(100deg, var(--txt) 40%, var(--red2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pn-name small { -webkit-text-fill-color: var(--red2); }
+
+/* الروابط */
+.pn-links { background: transparent; border: 0; padding: 0; gap: .1rem; }
+.pn-links a { padding: .6rem 1.1rem; border-radius: 999px; font-size: .92rem; color: var(--mut); }
+.pn-links a:hover, .pn-links a.on { color: var(--txt); }
+:root[data-theme='light'] .pn-links a:hover, :root[data-theme='light'] .pn-links a.on { color: var(--red); }
+.pn-pill { border-radius: 999px; background: linear-gradient(180deg, rgba(229,9,20,.30), rgba(229,9,20,.12)); border: 1px solid rgba(255,70,80,.5); box-shadow: 0 0 24px -4px rgba(229,9,20,.7), inset 0 1px 0 rgba(255,255,255,.18); }
+.pn-pill::after { content: ''; position: absolute; left: 50%; bottom: -1px; width: 22px; height: 3px; margin-left: -11px; border-radius: 3px; background: var(--red2); box-shadow: 0 0 12px 2px var(--red2); }
+
+/* الجانب الأيسر */
+.pn-right { gap: .55rem; }
+.pn-user { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); background: var(--sheen); color: var(--txt); transition: .3s var(--ease); }
+.pn-user svg { width: 19px; height: 19px; }
+.pn-user:hover { border-color: var(--red); color: #fff; background: var(--red); transform: translateY(-2px); box-shadow: 0 10px 26px -8px rgba(229,9,20,.9); }
+.pn-cta { border-radius: 999px; padding: .38rem .4rem .38rem 1.15rem; gap: .6rem; }
+.pn-arrow { border-radius: 50%; width: 32px; height: 32px; background: #fff; color: var(--red); font-weight: 900; }
+.pn-live { width: 8px; height: 8px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 0 rgba(255,255,255,.8); animation: pulseW 1.8s infinite; }
+@keyframes pulseW { to { box-shadow: 0 0 0 9px rgba(255,255,255,0); } }
+.pn-switch { height: 38px; width: 72px; }
+.pn-thumb { width: 30px; height: 30px; top: 4px; }
+
+@media (max-width: 1000px) { .pn-user { display: none; } .pn-bar { width: 100%; } }
+.pn-links a, .pn-cta, .pn-name { white-space: nowrap; }
+.pnav.is-scrolled .pn-bar { width: min(1060px, 100%); }
+.pn-links a { padding: .6rem .95rem; }
+@media (max-width: 1180px) { .pn-links a { padding: .55rem .7rem; font-size: .88rem; } .pn-bar { gap: .6rem; } }
