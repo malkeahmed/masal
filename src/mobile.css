@@ -1,0 +1,88 @@
+/* ================= تحسينات الهاتف ================= */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { -webkit-tap-highlight-color: transparent; }
+button, a { touch-action: manipulation; }
+
+@media (max-width: 700px) {
+  .noise, .cursor-glow { display: none !important; }
+  .sec { padding: 4.2rem 0; }
+  .container { padding-inline: 1.1rem; }
+
+  /* الهيرو: يملأ الشاشة ويتوسط عموديًا */
+  .hero.hero-c { display: flex; align-items: center; min-height: 100svh; padding: 6.2rem 0 2.2rem; }
+  .hero.hero-c .hc-wrap { margin-block: auto; padding-inline: 0; }
+  .hc-copy { padding-inline: 1.1rem; }
+  .hc-copy .h1 { font-size: 2.05rem; line-height: 1.3; }
+  .hero-sub { font-size: .98rem; line-height: 1.8; }
+  .ss { margin-top: 1.2rem; }
+  .hc-trust { width: calc(100% - 2.2rem); margin-top: 1.1rem; justify-content: space-between; }
+  .hc-trust .tr-cell { flex: 1; min-width: 0; justify-content: center; padding-inline: .3rem; }
+  .tr-ico { display: none; }
+  .tr-txt { text-align: center; align-items: center; }
+
+  /* الشريط المتقاطع */
+  .mx { height: 150px; }
+
+  /* الألبوم: تسميات صغيرة مرئية دائمًا */
+  .al-cap { transform: none; padding: .8rem .9rem; }
+  .al-cap b { font-size: .95rem; }
+  .al:not(.p1):not(.p6) .al-cap small { display: none; }
+  .al-zoom { display: none; }
+  .al { border-radius: 18px; }
+
+  /* حائط الشعارات */
+  .bw { border-radius: 22px; padding: 1.6rem .8rem; gap: .6rem; }
+  .bw-t { width: calc((100% - 3 * .6rem) / 4); max-width: 72px; }
+  .bw-pill { font-size: .78rem; }
+
+  /* الخدمات */
+  .sv-stage2 { height: 300px; margin-bottom: .5rem; }
+  .sv-badge { font-size: .72rem; padding: .4rem .8rem; }
+  .sv-list li { padding: .9rem 0; }
+
+  /* الخاتمة */
+  .fin h2 { font-size: 2rem; }
+  .fin-btns { flex-direction: column; width: 100%; }
+  .fin-btn { justify-content: center; width: 100%; }
+  .fin-bar { gap: 1rem; }
+  .fin-nav { gap: 1rem 1.4rem; }
+
+  /* زر العودة للأعلى */
+  .btt { left: .9rem; bottom: max(.9rem, env(safe-area-inset-bottom)); }
+
+  /* الناوبار */
+  .pn-bar { padding-inline: .6rem; }
+}
+
+/* شاشات صغيرة جدًا */
+@media (max-width: 380px) {
+  .hc-copy .h1 { font-size: 1.8rem; }
+  .fin h2 { font-size: 1.75rem; }
+  .ab-title { font-size: 2.1rem; }
+}
+
+/* أجهزة اللمس: لا تأثيرات تحويم دائمة */
+@media (hover: none) {
+  .al:hover, .gt:hover, .btt:hover { transform: none; }
+  .al:hover img { transform: none; }
+}
+
+/* ترتيب الألبوم على الهاتف: بلا فراغات */
+@media (max-width: 960px) { .al-grid .p6 { order: 9; } .al-grid { grid-auto-flow: dense; } }
+
+/* الإحصاءات: العنصر الأخير يملأ الصف */
+@media (max-width: 700px) { .stats-grid .stat:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+
+/* نوار الفوتر على الهاتف: كل شيء وسط */
+@media (max-width: 800px) {
+  .fin-bar { align-items: center; text-align: center; }
+  .fin-brand { flex-direction: column; text-align: center; }
+  .fin-nav { justify-content: center; }
+}
+@media (max-width: 800px) { .fin { padding-bottom: 5.2rem; } }
+
+/* هاتف: تقليل الفراغ بين الهيرو والشريط المتقاطع */
+@media (max-width: 700px) {
+  .hero.hero-c { min-height: auto; padding-bottom: 1.2rem; }
+  .mx { height: 128px; margin-top: -.6rem; margin-bottom: 0; }
+}

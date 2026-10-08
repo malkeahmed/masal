@@ -18,4 +18,7 @@ import './gallery.css'
 import './brands.css'
 import './final.css'
 import './lang.css'
-createRoot(document.getElementById('root')).render(<LangProvider><App /></LangProvider>)
+import './mobile.css'
+/* يبدأ التطبيق مع انفتاح ستارة شاشة التحميل (انظر index.html) */
+const start = () => createRoot(document.getElementById('root')).render(<LangProvider><App /></LangProvider>)
+;(window.__masalReady || Promise.resolve()).then(start, start)

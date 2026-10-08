@@ -7,6 +7,8 @@ const load = (src) => new Promise((resolve, reject) => {
 })
 
 export async function enhanceImage(src, target = 1000) {
+  // على الهاتف: أبعاد أصغر = معالجة أسرع وذاكرة أقل
+  if (typeof window !== 'undefined' && window.innerWidth < 800) target = Math.round(target * 0.55)
   try {
     const img = await load(src)
     const w = img.naturalWidth, h = img.naturalHeight

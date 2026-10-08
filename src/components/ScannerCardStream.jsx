@@ -50,17 +50,19 @@ export default function ScannerCardStream({ images, repeat = 4 }) {
     let ambient = []
     let sparks = []
     let maxSparks = PARTICLES_IDLE
-    let raf
+    let raf, pf = 1
 
     const resize = () => {
       W = root.clientWidth; H = root.clientHeight
-      cw = Math.round(Math.min(300, Math.max(170, W * 0.2)))
+      const small = W < 700
+      cw = small ? Math.round(Math.min(280, W * 0.66)) : Math.round(Math.min(300, Math.max(170, W * 0.2)))
       const ch = Math.round(cw / 1.58)
       step = cw + Math.round(cw * 0.2)
       root.style.setProperty('--cw', `${cw}px`)
       root.style.setProperty('--ch', `${ch}px`)
       canvas.width = W; canvas.height = H
-      ambient = Array.from({ length: 70 }, () => ({ x: Math.random() * W, y: Math.random() * H, v: 20 + Math.random() * 50, a: 0.15 + Math.random() * 0.45, r: 0.6 + Math.random() * 0.9 }))
+      pf = small ? 0.4 : 1
+      ambient = Array.from({ length: small ? 28 : 70 }, () => ({ x: Math.random() * W, y: Math.random() * H, v: 20 + Math.random() * 50, a: 0.15 + Math.random() * 0.45, r: 0.6 + Math.random() * 0.9 }))
     }
     resize()
     const ro = new ResizeObserver(resize); ro.observe(root)
@@ -137,7 +139,7 @@ export default function ScannerCardStream({ images, repeat = 4 }) {
         p.x += p.v * dt; if (p.x > W + 5) { p.x = -5; p.y = Math.random() * H }
         ctx.globalAlpha = p.a; ctx.fillRect(p.x, p.y, p.r * 1.6, p.r * 1.6)
       }
-      maxSparks += ((anyScan ? PARTICLES_SCAN : PARTICLES_IDLE) - maxSparks) * 0.06
+      maxSparks += ((anyScan ? PARTICLES_SCAN : PARTICLES_IDLE) * pf - maxSparks) * 0.06
       while (sparks.length < maxSparks) sparks.push(spark())
       while (sparks.length > maxSparks) sparks.pop()
       ctx.fillStyle = '#ff8f86'

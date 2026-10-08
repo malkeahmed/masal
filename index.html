@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#050505" />
     <title>ماسال | الوكيل الرئيسي لآسياسيل – الكروت الإلكترونية</title>
     <meta name="description" content="ماسال – وجهتكم الموثوقة لشراء الكروت الإلكترونية: شحن رصيد، هدايا، ألعاب وترفيه رقمي بأفضل الأسعار." />
@@ -10,9 +10,126 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preload" as="image" href="/images/logo.png" />
+
+    <!-- شاشة التحميل: CSS مضمّن لتظهر فورًا قبل أي ملف آخر -->
+    <style>
+      html.pl-lock, html.pl-lock body { overflow: hidden; }
+      #pl { --bg: #09090c; --fg: #fff; --mut: rgba(255,255,255,.5); position: fixed; inset: 0; z-index: 9999; direction: ltr; font-family: 'Space Grotesk', 'Cairo', system-ui, sans-serif; color: var(--fg); }
+      #pl.light { --bg: #ffffff; --fg: #0b0b0d; --mut: rgba(0,0,0,.45); }
+      #pl .pl-half { position: absolute; left: 0; right: 0; height: 50.2%; background: var(--bg); transition: transform 1s cubic-bezier(.76, 0, .18, 1) .18s; will-change: transform; }
+      #pl .pl-half.t { top: 0; } #pl .pl-half.b { bottom: 0; }
+      #pl .pl-fx { position: absolute; inset: 0; pointer-events: none; transition: opacity .45s; }
+      #pl .pl-glow { position: absolute; left: 50%; top: 50%; width: 760px; height: 760px; max-width: 160vw; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(229, 9, 20, .5), rgba(229, 9, 20, .1) 60%, transparent); animation: plGlow 3.2s ease-in-out infinite; }
+      #pl.light .pl-glow { background: radial-gradient(closest-side, rgba(229, 9, 20, .22), rgba(229, 9, 20, .05) 60%, transparent); }
+      #pl canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+      #pl .pl-c { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 1.6rem; transition: transform .6s cubic-bezier(.5, 0, .2, 1), opacity .4s; }
+      #pl .pl-tile { position: relative; width: 112px; height: 112px; display: grid; place-items: center; animation: plBob 3.4s ease-in-out infinite; }
+      #pl .pl-tile img { position: relative; width: 84px; height: 84px; border-radius: 20px; background: #fff; object-fit: contain; padding: 4px; box-shadow: 0 22px 50px -16px rgba(229, 9, 20, .8); }
+      #pl .pl-ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+      #pl .pl-ring rect { fill: none; stroke-width: 2.4; }
+      #pl .pl-track { stroke: rgba(128, 128, 128, .28); }
+      #pl .pl-bar { stroke: #ff3b47; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 6px rgba(255, 59, 71, .9)); }
+      #pl .pl-pulse { position: absolute; inset: -2px; border-radius: 34px; border: 1.5px solid rgba(255, 59, 71, .55); animation: plPulse 2.4s ease-out infinite; }
+      #pl .pl-pulse.b { animation-delay: 1.2s; }
+      #pl .pl-word { display: flex; gap: .42em; font-size: 1.15rem; font-weight: 700; letter-spacing: .1em; }
+      #pl .pl-word span { opacity: 0; transform: translateY(10px); animation: plLetter .7s cubic-bezier(.22, 1, .36, 1) forwards; }
+      #pl .pl-word span:nth-child(1) { animation-delay: .15s; } #pl .pl-word span:nth-child(2) { animation-delay: .22s; } #pl .pl-word span:nth-child(3) { animation-delay: .29s; } #pl .pl-word span:nth-child(4) { animation-delay: .36s; } #pl .pl-word span:nth-child(5) { animation-delay: .43s; }
+      #pl .pl-meta { display: flex; align-items: baseline; gap: .35rem; font-size: .8rem; color: var(--mut); letter-spacing: .14em; font-variant-numeric: tabular-nums; }
+      #pl .pl-num { font-size: 1.5rem; font-weight: 700; color: var(--fg); letter-spacing: 0; min-width: 2ch; text-align: right; }
+      #pl.out .pl-c { transform: translate(-50%, -50%) scale(1.18); opacity: 0; }
+      #pl.out .pl-fx { opacity: 0; }
+      #pl.out .pl-half.t { transform: translateY(-101%); }
+      #pl.out .pl-half.b { transform: translateY(101%); }
+      @keyframes plGlow { 50% { opacity: .65; transform: translate(-50%, -50%) scale(1.1); } }
+      @keyframes plBob { 50% { transform: translateY(-7px); } }
+      @keyframes plPulse { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(1.5); opacity: 0; } }
+      @keyframes plLetter { to { opacity: 1; transform: none; } }
+      @media (prefers-reduced-motion: reduce) { #pl .pl-glow, #pl .pl-tile, #pl .pl-pulse { animation: none; } }
+    </style>
   </head>
   <body>
+    <div id="pl" aria-hidden="true">
+      <div class="pl-half t"></div><div class="pl-half b"></div>
+      <div class="pl-fx"><i class="pl-glow"></i><canvas></canvas></div>
+      <div class="pl-c">
+        <div class="pl-tile">
+          <i class="pl-pulse"></i><i class="pl-pulse b"></i>
+          <svg class="pl-ring" viewBox="0 0 112 112"><rect class="pl-track" x="1.5" y="1.5" width="109" height="109" rx="31" pathLength="1" /><rect class="pl-bar" x="1.5" y="1.5" width="109" height="109" rx="31" pathLength="1" /></svg>
+          <img src="/images/logo.png" alt="" width="84" height="84" />
+        </div>
+        <div class="pl-word"><span>M</span><span>A</span><span>S</span><span>A</span><span>L</span></div>
+        <div class="pl-meta"><b class="pl-num">00</b>%</div>
+      </div>
+    </div>
     <div id="root"></div>
+
+    <script>
+      /* شاشة التحميل: تقدّم حقيقي (الخطوط + صور الهيرو) مع حدّ أدنى للزمن، ثم ستارة تنفتح للأعلى والأسفل */
+      (function () {
+        var pl = document.getElementById('pl'); if (!pl) return
+        var html = document.documentElement
+        try { if (localStorage.getItem('theme') === 'light') pl.classList.add('light') } catch (e) {}
+        html.classList.add('pl-lock')
+        var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches
+        var MIN = reduce ? 500 : 1700
+        var bar = pl.querySelector('.pl-bar'), num = pl.querySelector('.pl-num')
+        var imgs = ['/images/card-15000.webp', '/images/card-40000.webp', '/images/card-25000.webp', '/images/card-40000-b.jpg', '/images/card-10000.jpg', '/images/card-5000.jpg']
+        var total = imgs.length + 1, loaded = 0
+        var inc = function () { loaded++ }
+        imgs.forEach(function (s) { var i = new Image(); i.onload = i.onerror = inc; i.src = s })
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(inc, inc); else inc()
+        setTimeout(function () { loaded = total }, 6000)
+
+        var ready; window.__masalReady = new Promise(function (r) { ready = r })
+
+        /* بكسلات من الجانبين */
+        var cv = pl.querySelector('canvas'), cx = cv.getContext('2d'), W = 0, H = 0, S = 10, hs = []
+        function size() {
+          var d = Math.min(window.devicePixelRatio || 1, 2)
+          W = cv.clientWidth; H = cv.clientHeight; cv.width = W * d; cv.height = H * d; cx.setTransform(d, 0, 0, d, 0, 0)
+          hs = []; for (var i = 0; i < Math.ceil(W / S) * Math.ceil(H / S); i++) hs.push(Math.random())
+        }
+        size(); window.addEventListener('resize', size)
+        var col = pl.classList.contains('light') ? '229,9,20' : '255,70,80'
+        function px(t) {
+          cx.clearRect(0, 0, W, H)
+          var cols = Math.ceil(W / S), rows = Math.ceil(H / S), reach = W < 700 ? W * 0.22 : Math.min(W * 0.3, 520)
+          for (var i = 0; i < cols; i++) {
+            var x = i * S, d = Math.min(x, W - x - S); if (d > reach) continue
+            var fade = Math.pow(1 - d / reach, 1.7)
+            for (var j = 0; j < rows; j++) {
+              var h = hs[i * rows + j]; if (h > 0.18 + fade * 0.72) continue
+              var v = 0.5 + 0.5 * Math.sin(t * 1.1 - (i + j) * 0.22 + h * 6.28) * 0.65 + 0.5 * Math.sin(t * (1.2 + h * 2.2) + h * 40) * 0.35
+              var a = fade * Math.max(0, v - 0.28) * 0.7; if (a < 0.03) continue
+              cx.fillStyle = 'rgba(' + col + ',' + Math.min(a, 0.4).toFixed(3) + ')'
+              cx.fillRect(x + 1, j * S + 1, S - 2, S - 2)
+            }
+          }
+        }
+
+        var t0 = performance.now(), shown = 0, finished = false
+        function done() {
+          finished = true
+          bar.style.strokeDashoffset = 0; num.textContent = '100'
+          setTimeout(function () {
+            pl.classList.add('out'); ready()
+            setTimeout(function () { if (pl.parentNode) pl.parentNode.removeChild(pl); html.classList.remove('pl-lock') }, 1500)
+          }, 320)
+        }
+        function frame(now) {
+          if (finished) return
+          px((now - t0) / 1000)
+          var target = Math.min(loaded / total, Math.min((now - t0) / MIN, 1))
+          shown += (target - shown) * 0.1
+          bar.style.strokeDashoffset = String(1 - shown)
+          var p = Math.round(shown * 100); num.textContent = (p < 10 ? '0' : '') + p
+          if (shown > 0.995 && loaded >= total) return done()
+          requestAnimationFrame(frame)
+        }
+        requestAnimationFrame(frame)
+      })()
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

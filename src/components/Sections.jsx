@@ -375,9 +375,9 @@ function FinPixels() {
       if (!vis) return
       const t = ms / 1000
       ctx.clearRect(0, 0, W, H)
-      const reach = Math.min(W * 0.34, 560)
+      const reach = W < 700 ? W * 0.2 : Math.min(W * 0.34, 560)
       const col = light() ? '229,9,20' : '255,70,80'
-      const boost = light() ? 1.15 : 1
+      const boost = (light() ? 1.15 : 1) * (W < 700 ? 0.8 : 1)
       for (let i = 0; i < cols; i++) {
         const x = i * S
         const d = Math.min(x, W - x - S) // البعد عن أقرب حافة
