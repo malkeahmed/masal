@@ -1,0 +1,55 @@
+/* ================= زوايا شبه مربعة: بوردر راديوس قليل لكل البطاقات والأزرار ================= */
+:root { --r-xs: 4px; --r-sm: 6px; --r-md: 8px; --r-lg: 10px; }
+
+/* الهيرو */
+.hc-badge { border-radius: var(--r-sm); }
+.hc-trust { border-radius: var(--r-lg); }
+.tr-cell, .tr-ico { border-radius: var(--r-sm); }
+.ss-normal, .ss-ascii { border-radius: var(--r-md); }
+
+/* من نحن */
+.ab-pan { border-radius: var(--r-lg); }
+.ab-ico { border-radius: var(--r-md); }
+.ab-prov { border-radius: var(--r-lg); }
+.ab-hl2::after { border-radius: 0; }
+
+/* الخدمات */
+.sv-ico { border-radius: var(--r-md); }
+.sv-li-a { border-radius: var(--r-md); }
+.svc-face, .sv-back { border-radius: var(--r-md); }
+.svc-ic { border-radius: var(--r-sm); }
+.svc-amt, .sv-badge { border-radius: var(--r-sm); }
+.svc-chip { border-radius: 3px; }
+
+/* المعرض */
+.al { border-radius: var(--r-md); }
+.al-zoom { border-radius: var(--r-sm); }
+.lbx-f img { border-radius: var(--r-md); }
+.lbx-x, .lbx-n { border-radius: var(--r-md); }
+
+/* حائط الشعارات والقيم */
+.bw { border-radius: var(--r-lg); }
+.bw-in { border-radius: var(--r-sm); }
+.bw-pill { border-radius: var(--r-xs); }
+.bw-vals li { border-radius: var(--r-md); }
+
+/* الخاتمة */
+.fin-pill { border-radius: var(--r-xs); }
+.fin-btn { border-radius: var(--r-sm); }
+.fin-btn.main em { border-radius: var(--r-xs); }
+.fin-brand img { border-radius: var(--r-sm); }
+
+/* أزرار عامة */
+.btt { border-radius: var(--r-md); }
+.btt-track, .btt-bar { rx: 7px; }
+.pn-lang { border-radius: var(--r-md); }
+.pn-user { border-radius: var(--r-md); }
+.pn-cta { border-radius: var(--r-md); }
+.btn { border-radius: var(--r-sm); }
+
+/* شاشة الجوال: الشبكة نفسها */
+@media (max-width: 700px) {
+  .bw { border-radius: var(--r-lg); }
+  .al { border-radius: var(--r-md); }
+  .btt { border-radius: var(--r-md); }
+}
