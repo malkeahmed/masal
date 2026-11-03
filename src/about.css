@@ -67,3 +67,6 @@
   .ab-prov-m { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .ab-prov-t { animation: none !important; } .ab-pan, .ab-pb { transition: none !important; } }
+
+/* عدد المحافظات بالأحمر */
+.ab-prov-l b { color: var(--red2); }
