@@ -52,6 +52,11 @@ function PanelBody({ i }) {
   if (i === 0) return (
     <>
       <p className="ab-lead">{t('about.lead')(mark)}</p>
+      <p className="ab-cover2">{t('about.cover')}</p>
+      <div className="ab-pair">
+        <div className="ab-stat"><small>{t('about.s1t')}</small><div><b>34</b><span>{t('about.s1')}</span></div></div>
+        <div className="ab-stat"><div><b>64</b><span>{t('about.s2')}</span></div></div>
+      </div>
       <div className="ab-cols">
         <p>{t('about.c1')}</p>
         <p>{t('about.c2')}</p>
@@ -109,6 +114,89 @@ export function About() {
         <Reveal className="ab-quote" y={24}>
           <p>{t('about.q1')} <span className="ab-hl">{t('about.q2')}</span></p>
         </Reveal>
+      </div>
+    </section>
+  )
+}
+
+/* ===== ملف الشركة: ترحيب + الهيكل التنظيمي + نقاط القوة + القيم ===== */
+const PF_FACT_ICO = [
+  <><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4" /><path d="M7 9h2M11 9h6M7 12h6" /></>,
+  <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></>,
+  <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.6 2.8 4 5.8 4 9s-1.4 6.2-4 9c-2.6-2.8-4-5.8-4-9s1.4-6.2 4-9z" /></>,
+  <><circle cx="12" cy="8" r="4" /><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" /></>,
+  <><path d="M12 21s-6.5-5.4-6.5-10.2a6.5 6.5 0 1 1 13 0C18.5 15.6 12 21 12 21z" /><circle cx="12" cy="10.6" r="2.3" /></>,
+]
+const PF_VAL_ICO = [
+  <><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z" /></>,
+  <><path d="M12 3l7.5 3v5.2c0 4.6-3.1 8.2-7.5 9.8-4.4-1.6-7.5-5.2-7.5-9.8V6L12 3z" /><path d="M8.8 12.2l2.3 2.3 4.2-4.4" /></>,
+  <><path d="M20.8 5.6a5.2 5.2 0 0 0-7.4 0L12 7l-1.4-1.4a5.2 5.2 0 0 0-7.4 7.4L12 21.8l8.8-8.8a5.2 5.2 0 0 0 0-7.4z" /></>,
+  <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />,
+]
+const PF_ICO = ({ d }) => (
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>{d}</svg>
+)
+/* تلوين الأرقام داخل الجملة */
+const withNums = (s) => s.split(/(\d[\d,]*)/).map((p, i) => (/^\d/.test(p) ? <b key={i} className="pf-n">{p}</b> : p))
+
+export function Profile() {
+  const { t } = useLang()
+  const depts = t('pf.depts')
+  const facts = t('pf.facts')
+  const vals = t('pf.values')
+  return (
+    <section className="sec pf" id="profile">
+      <div className="pf-bg" aria-hidden />
+      <div className="container">
+        <Reveal className="pf-head" y={30}>
+          <h2>{t('pf.h2')}</h2>
+          <p className="pf-sub">{t('pf.sub')}</p>
+        </Reveal>
+
+        <Reveal className="pf-intro" y={34}>
+          <span className="pf-q" aria-hidden>“</span>
+          <p>{t('pf.intro')}</p>
+        </Reveal>
+
+        <div className="pf-org">
+          <Reveal className="pf-orghead" y={26}>
+            <h3>{t('pf.orgTitle')}</h3>
+            <p>{t('pf.orgText')}</p>
+          </Reveal>
+          <Reveal className="pf-root" y={30}>
+            <span className="pf-no">1</span>
+            <h4>{depts[0].t}</h4>
+            <p>{depts[0].d}</p>
+          </Reveal>
+          <div className="pf-kids">
+            {depts.slice(1).map((d, k) => (
+              <Reveal key={d.t} className="pf-kid" y={34} delay={k * 0.07}>
+                <span className="pf-no">{k + 2}</span>
+                <h4>{d.t}</h4>
+                <p>{d.d}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        <div className="pf-facts">
+          {facts.map((f, k) => (
+            <Reveal key={k} className={'pf-fact f' + k} y={32} delay={(k % 3) * 0.08}>
+              <span className="pf-fi"><PF_ICO d={PF_FACT_ICO[k]} /></span>
+              <p>{withNums(f)}</p>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="pf-vals">
+          {vals.map((v, k) => (
+            <Reveal key={v.t} className="pf-val" y={30} delay={k * 0.08}>
+              <span className="pf-vi"><PF_ICO d={PF_VAL_ICO[k]} /></span>
+              <h4>{v.t}</h4>
+              <p>{v.d}</p>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   )

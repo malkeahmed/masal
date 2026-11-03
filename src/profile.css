@@ -1,0 +1,87 @@
+/* ================= ملف الشركة: ترحيب + هيكل تنظيمي (شجرة) + نقاط القوة + القيم ================= */
+.pf { position: relative; overflow: hidden; padding: 6.5rem 0; }
+.pf-bg { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 55% 30% at 50% 0%, rgba(229,9,20,.1), transparent 70%), linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: auto, 64px 64px, 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 25%, #000, transparent 85%); mask-image: radial-gradient(ellipse 85% 70% at 50% 25%, #000, transparent 85%); }
+.pf .container { position: relative; display: flex; flex-direction: column; gap: 4.5rem; }
+
+/* الترحيب */
+.pf-head { text-align: center; }
+.pf-head h2 { font-size: clamp(2.4rem, 5.6vw, 4.8rem); font-weight: 900; line-height: 1.2; letter-spacing: -.015em; }
+.pf-head h2::after { content: ''; display: block; width: 90px; height: 4px; margin: 1.2rem auto 0; border-radius: 3px; background: linear-gradient(90deg, transparent, var(--red2), transparent); }
+.pf-sub { margin-top: 1.3rem; color: var(--mut); font-size: clamp(1.05rem, 1.8vw, 1.35rem); font-weight: 700; }
+
+.pf-intro { position: relative; padding: 2.8rem 3.2rem; border: 1px solid var(--line); border-radius: 10px; background: var(--s1); overflow: hidden; }
+.pf-intro::before { content: ''; position: absolute; top: 0; inset-inline: 0; height: 3px; background: linear-gradient(90deg, var(--red2), transparent 70%); }
+.pf-q { position: absolute; top: -.8rem; inset-inline-start: 1.4rem; font-family: Georgia, serif; font-size: 9rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(229,9,20,.45); pointer-events: none; }
+.pf-intro p { position: relative; font-size: clamp(1.05rem, 1.7vw, 1.3rem); line-height: 2.1; font-weight: 600; max-width: 62rem; margin-inline: auto; }
+
+/* الهيكل التنظيمي */
+.pf-org { display: flex; flex-direction: column; align-items: center; }
+.pf-orghead { text-align: center; max-width: 46rem; }
+.pf-orghead h3 { font-size: clamp(1.7rem, 3.2vw, 2.6rem); font-weight: 900; }
+.pf-orghead h3::before { content: ''; display: block; width: 46px; height: 3px; margin: 0 auto .9rem; background: var(--red2); border-radius: 2px; }
+.pf-orghead p { color: var(--mut); margin-top: .8rem; font-size: 1.05rem; line-height: 1.9; }
+
+.pf-root { position: relative; margin-top: 2.2rem; width: min(560px, 100%); padding: 1.6rem 1.8rem 1.8rem; border-radius: 10px; text-align: center; color: #fff;
+  background: linear-gradient(150deg, #ff3b47, #b30d16); box-shadow: 0 26px 60px -26px rgba(229,9,20,.7); }
+.pf-root::after { content: ''; position: absolute; left: 50%; bottom: -34px; width: 2px; height: 34px; background: var(--red2); transform: translateX(-50%); }
+.pf-root h4 { font-size: 1.35rem; font-weight: 900; margin: .5rem 0 .4rem; }
+.pf-root p { font-size: .95rem; line-height: 1.85; opacity: .92; }
+.pf-root .pf-no { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.45); color: #fff; }
+
+.pf-kids { position: relative; width: 100%; margin-top: 34px; padding-top: 28px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+.pf-kids::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 2px; background: var(--red2); }
+.pf-kid { position: relative; padding: 1.4rem 1.1rem 1.5rem; border: 1px solid var(--line); border-radius: 8px; background: var(--s1); transition: border-color .4s, transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s; }
+.pf-kid::before { content: ''; position: absolute; top: -28px; left: 50%; width: 2px; height: 28px; background: var(--red2); transform: translateX(-50%); }
+.pf-kid:hover { border-color: rgba(229,9,20,.55); transform: translateY(-5px); box-shadow: 0 24px 44px -26px rgba(229,9,20,.55); }
+.pf-no { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .9rem; color: var(--red2); background: rgba(229,9,20,.1); border: 1px solid rgba(229,9,20,.3); }
+.pf-kid h4 { font-size: 1.05rem; font-weight: 900; margin: .8rem 0 .5rem; line-height: 1.4; }
+.pf-kid p { color: var(--mut); font-size: .86rem; line-height: 1.9; }
+
+/* نقاط القوة */
+.pf-facts { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+.pf-fact { grid-column: span 2; position: relative; padding: 1.7rem 1.6rem; border: 1px solid var(--line); border-radius: 8px; background: var(--s1); overflow: hidden; transition: border-color .4s, transform .5s cubic-bezier(.22,1,.36,1); }
+.pf-fact.f3, .pf-fact.f4 { grid-column: span 3; }
+.pf-fact::after { content: ''; position: absolute; inset-inline: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, var(--red2), transparent); transform: scaleX(0); transform-origin: right; transition: transform .7s cubic-bezier(.22,1,.36,1); }
+html[dir='ltr'] .pf-fact::after { transform-origin: left; }
+.pf-fact:hover { border-color: rgba(229,9,20,.45); transform: translateY(-4px); }
+.pf-fact:hover::after { transform: scaleX(1); }
+.pf-fi { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 8px; color: var(--red2); background: rgba(229,9,20,.1); border: 1px solid rgba(229,9,20,.28); margin-bottom: 1rem; }
+.pf-fact p { font-size: 1rem; line-height: 1.95; font-weight: 600; }
+.pf-n { font-family: 'Space Grotesk', sans-serif; font-size: 1.35em; font-weight: 700; color: var(--red2); padding: 0 .08em; }
+
+/* القيم */
+.pf-vals { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--s1); }
+.pf-val { position: relative; padding: 2rem 1.6rem 2.1rem; }
+.pf-val + .pf-val { border-inline-start: 1px solid var(--line); }
+.pf-val::before { content: ''; position: absolute; inset: 0; background: radial-gradient(80% 70% at 50% 0%, rgba(229,9,20,.14), transparent 70%); opacity: 0; transition: opacity .5s; pointer-events: none; }
+.pf-val:hover::before { opacity: 1; }
+.pf-vi { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 8px; color: var(--red2); border: 1px solid rgba(229,9,20,.3); background: rgba(229,9,20,.08); }
+.pf-val h4 { font-size: 1.4rem; font-weight: 900; margin: 1rem 0 .5rem; }
+.pf-val p { color: var(--mut); font-size: .95rem; line-height: 1.9; }
+
+:root[data-theme='light'] .pf-intro, :root[data-theme='light'] .pf-kid, :root[data-theme='light'] .pf-fact, :root[data-theme='light'] .pf-vals { background: #fff; }
+
+@media (max-width: 1000px) {
+  .pf-kids { grid-template-columns: repeat(2, 1fr); padding-top: 0; margin-top: 34px; }
+  .pf-kids::before, .pf-kid::before { display: none; }
+  .pf-facts { grid-template-columns: 1fr 1fr; }
+  .pf-fact, .pf-fact.f3, .pf-fact.f4 { grid-column: auto; }
+  .pf-fact.f4 { grid-column: 1 / -1; }
+  .pf-vals { grid-template-columns: 1fr 1fr; }
+  .pf-val + .pf-val { border-inline-start: 0; }
+  .pf-val:nth-child(even) { border-inline-start: 1px solid var(--line); }
+  .pf-val:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 640px) {
+  .pf { padding: 4rem 0; }
+  .pf .container { gap: 3rem; }
+  .pf-intro { padding: 2rem 1.4rem; }
+  .pf-kids, .pf-facts, .pf-vals { grid-template-columns: 1fr; }
+  .pf-fact.f4 { grid-column: auto; }
+  .pf-val:nth-child(even) { border-inline-start: 0; }
+  .pf-val + .pf-val { border-top: 1px solid var(--line); }
+}
+@media (prefers-reduced-motion: reduce) { .pf-kid, .pf-fact { transition: none; } }

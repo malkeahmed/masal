@@ -3,7 +3,7 @@ import Navbar from './components/Navbar.jsx'
 import BackToTop from './components/BackToTop.jsx'
 import Hero from './components/Hero.jsx'
 import { Gallery } from './components/Showcase.jsx'
-import { MarqueeX, About, Stats, Services, Values, CTA } from './components/Sections.jsx'
+import { MarqueeX, About, Profile, Stats, Services, Values, CTA } from './components/Sections.jsx'
 
 export default function App() {
   return (
@@ -13,6 +13,7 @@ export default function App() {
       <Hero />
       <MarqueeX />
       <About />
+      <Profile />
       <Stats />
       <Services />
       <Gallery />

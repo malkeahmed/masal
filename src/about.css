@@ -70,3 +70,23 @@
 
 /* عدد المحافظات بالأحمر */
 .ab-prov-l b { color: var(--red2); }
+
+/* نص «قصتنا» الكامل: لوحة أطول وعمودان متفاوتان */
+.ab-acc { height: 580px; }
+.ab-pan.on .ab-cols { grid-template-columns: 1.35fr 1fr; gap: 1.6rem; }
+.ab-pan.on .ab-cols p { font-size: .9rem; line-height: 1.85; }
+@media (max-width: 960px) { .ab-acc { height: auto; } .ab-pan.on .ab-cols { grid-template-columns: 1fr; } }
+
+/* «قصتنا»: نفس النص بالضبط، موزّع في كتل مرتبة */
+.ab-acc { height: 560px; }
+.ab-pan.on .ab-lead { font-size: 1.12rem; line-height: 1.8; }
+.ab-cover2 { color: var(--mut); font-size: .9rem; line-height: 1.9; margin-top: .8rem; padding-inline-start: .9rem; border-inline-start: 2px solid var(--red2); }
+.ab-pair { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin-top: .9rem; }
+.ab-stat { padding: .85rem 1.1rem; border: 1px solid var(--line); border-radius: 8px; background: rgba(229,9,20,.05); display: flex; flex-direction: column; justify-content: center; gap: .15rem; min-height: 88px; }
+.ab-stat small { color: var(--red2); font-size: .82rem; font-weight: 800; }
+.ab-stat > div { display: flex; align-items: center; gap: .8rem; }
+.ab-stat b { font-family: 'Space Grotesk', sans-serif; font-size: 2.6rem; font-weight: 700; line-height: 1; color: var(--red2); letter-spacing: -.03em; }
+.ab-stat span { font-size: .9rem; font-weight: 700; line-height: 1.5; }
+.ab-pan.on .ab-cols { grid-template-columns: 1fr 1fr; gap: 1.6rem; margin-top: .9rem; }
+.ab-pan.on .ab-cols p { font-size: .9rem; line-height: 1.85; }
+@media (max-width: 960px) { .ab-acc { height: auto; } .ab-pair, .ab-pan.on .ab-cols { grid-template-columns: 1fr; } }
