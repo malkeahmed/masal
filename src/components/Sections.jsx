@@ -100,7 +100,7 @@ export function About() {
         </Reveal>
 
         <div className="ab-prov" aria-label={t('about.provAria')}>
-          <span className="ab-prov-l"><b>08</b>{t('about.provLabel')}</span>
+          <span className="ab-prov-l"><b>8</b>{t('about.provLabel')}</span>
           <div className="ab-prov-m"><div className="ab-prov-t">
             {[...PROV, ...PROV, ...PROV, ...PROV].map((n, i) => <span key={i}><i />{n}</span>)}
           </div></div>

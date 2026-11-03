@@ -26,12 +26,12 @@ const D = {
 
   /* الهيرو */
   'hero.badge': mk('الوكيل الرئيسي لآسياسيل', 'Asiacell Main Agent'),
-  'hero.h1a': mk('أسرع وأبسط', 'The fastest & simplest'),
-  'hero.h1b': mk('حلّ للكروت', 'solution for'),
-  'hero.h1c': mk('الإلكترونية', 'e-cards'),
+  'hero.h1a': mk('منصة معتمدة', 'An authorised platform'),
+  'hero.h1b': mk('لبيع الكروت', 'for selling cards'),
+  'hero.h1c': mk('والخدمات الإلكترونية', 'and e-services'),
   'hero.sub': mk(
-    'كروت شحن، ألعاب، هدايا وترفيه رقمي، أصلية ومعتمدة، تصلك فورًا وبأمان عبر أكثر من 10,000 نقطة بيع في العراق.',
-    'Top-up, gaming, gift and digital-entertainment cards — genuine and certified, delivered instantly and securely through 10,000+ points of sale across Iraq.',
+    'بأفضل الأسعار وأعلى معايير الخدمة',
+    'at the best prices and the highest service standards.',
   ),
   'hero.t1': mk('خبرة منذ', 'Experience since'),
   'hero.t2': mk('نقطة بيع', 'Points of sale'),
